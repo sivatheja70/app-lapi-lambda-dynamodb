@@ -11,6 +11,7 @@ variable "hash_key_type"{}
 /* variable "secondary_key"{}
 variable "secondary_key_type"{} */
 
+
 #lambda
 /* variable "function_name" {
   type        = list(string)
@@ -24,9 +25,9 @@ variable "filename"{
 }
 
 # Api Gateway
-/* variable "path"{}
+/* variable "path"{} */
 variable "type"{}
 variable "api_gateway_methods" {
   type = list(string)
 }
-variable "integration_type"{} */
+variable "integration_type"{}

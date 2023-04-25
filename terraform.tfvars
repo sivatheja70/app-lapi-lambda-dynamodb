@@ -10,13 +10,12 @@ hash_key_type = "S"
 secondary_key_type = "S" */
 
 #Lambda
-/* function_name =["${var.environment}-get-lambda", "${var.environment}-get-lambda"] */
 run_time="python3.9"
 handler=["getlambda.lambda_handler", "insertlambda.lambda_handler"]
 filename=["getlambda.py", "insertlambda.py"]
 
 #API GATEWAY
 type="REGIONAL"
-path="example"
-api_gateway_methods=["ANY"]
-integration_type = "AWS_PROXY"
+/* path="example" */
+api_gateway_methods=["GET", "POST"]
+integration_type = "AWS"

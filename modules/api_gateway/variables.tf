@@ -1,18 +1,16 @@
-variable "api_gateway_environment"{
+variable "api_gateway_environment" {}
+/* variable "function_name"{} */
+variable "get_function_name" {}
+variable "post_function_name" {}
+/* variable "function_arn"{} */
+variable "get_function_arn" {}
+variable "post_function_arn" {}
+variable "stage_name" {}
 
-}
-variable "function_name"{
-
-}
-variable "function_arn"{
-
-}
-variable "stage_name"{}
-
-variable "path"{}
-variable "type"{}
+/* variable "path"{} */
+variable "type" {}
 
 variable "api_gateway_methods" {
   type = list(string)
 }
-variable "integration_type"{}
+variable "integration_type" {}
