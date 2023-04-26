@@ -1,7 +1,7 @@
 provider "aws" {
   access_key = ""
   secret_key = ""
-  region     = "us-west-2"
+  region     = "us-east-1"
 }
 
 terraform {
@@ -14,6 +14,13 @@ data "archive_file" "handler_zip" {
   type        = "zip"
   source_file = "${path.module}/${var.filename[count.index]}"
   output_path = "${path.module}/handler${count.index + 1}.zip"
+}
+#cloudfront
+module "cloudfront" {
+  source              = "./modules/cloudfront"
+  origin_id           = var.origin_id
+  environment         = var.environment
+  default_root_object = var.default_root_object
 }
 
 #Dynamo DB
@@ -42,15 +49,15 @@ module "lambda" {
 }
 #Api Gateway
 module "api_gateway" {
-  source           = "./modules/api_gateway"
-  integration_type = var.integration_type
+  source                   = "./modules/api_gateway"
+  integration_type         = var.integration_type
   /* path = var.path */
   type                = var.type
-  api_gateway_methods = var.api_gateway_methods
-  stage_name          = var.environment
+  api_gateway_methods      = var.api_gateway_methods
+  stage_name               = var.environment
   /* function_name = module.lambda.created_lambda_function_name */
-  get_function_name  = module.lambda.get_function_name
-  post_function_name = module.lambda.post_function_name
+  get_function_name        = module.lambda.get_function_name
+  post_function_name       = module.lambda.post_function_name
   /* function_arn = module.lambda.created_lambda_function_arn */
   get_function_arn        = module.lambda.get_function_arn
   post_function_arn       = module.lambda.post_function_arn

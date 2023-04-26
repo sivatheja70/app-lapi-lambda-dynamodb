@@ -21,3 +21,17 @@ resource "aws_dynamodb_table" "dynamo_table" {
     } */
 }
 
+provider "aws" {
+  alias  = "region2"
+  region = "us-west-2"
+}
+
+resource "aws_dynamodb_table_replica" "dynamo_table_replica" {
+  provider         = aws.region2
+  global_table_arn = aws_dynamodb_table.dynamo_table.arn
+
+  tags = {
+    Name = "employeeprofile"
+  }
+}
+

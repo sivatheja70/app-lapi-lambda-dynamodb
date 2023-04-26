@@ -1,5 +1,8 @@
 variable "environment" {
 }
+#cloudfront
+variable "origin_id" {}
+variable "default_root_object" {}
 
 #DynamoDB
 variable "dynamodb_name" {}
