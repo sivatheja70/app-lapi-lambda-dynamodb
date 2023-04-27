@@ -18,3 +18,4 @@ variable "handler" {
 
 }
 variable "run_time"{}
+variable "dr"{}

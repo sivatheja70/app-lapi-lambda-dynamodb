@@ -45,19 +45,20 @@ module "lambda" {
   run_time      = var.run_time
   file_path     = [for zip_file in data.archive_file.handler_zip : zip_file.output_path]
   environment   = var.environment
+  dr             = "false"
   /* dynamodb_created_table = module.dynamodb.dynamodb_created_table */
 }
 #Api Gateway
 module "api_gateway" {
-  source                   = "./modules/api_gateway"
-  integration_type         = var.integration_type
+  source           = "./modules/api_gateway"
+  integration_type = var.integration_type
   /* path = var.path */
   type                = var.type
-  api_gateway_methods      = var.api_gateway_methods
-  stage_name               = var.environment
+  api_gateway_methods = var.api_gateway_methods
+  stage_name          = var.environment
   /* function_name = module.lambda.created_lambda_function_name */
-  get_function_name        = module.lambda.get_function_name
-  post_function_name       = module.lambda.post_function_name
+  get_function_name  = module.lambda.get_function_name
+  post_function_name = module.lambda.post_function_name
   /* function_arn = module.lambda.created_lambda_function_arn */
   get_function_arn        = module.lambda.get_function_arn
   post_function_arn       = module.lambda.post_function_arn

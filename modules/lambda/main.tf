@@ -36,11 +36,11 @@ resource "aws_lambda_function" "lambda_for_api" {
   runtime       = var.run_time
   filename      = var.file_path[count.index]
 
-  /* environment {
+  environment {
     variables = {
-      TABLE_NAME = var.dynamodb_created_table
+      REGION = var.dr ? "us-west-2" : "us-east-1"
     }
-  } */
+  }
 }
 
 

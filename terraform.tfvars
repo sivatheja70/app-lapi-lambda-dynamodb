@@ -2,7 +2,7 @@ environment = "sandbox"
 
 #cloudfront
 origin_id           = "s3_origin"
-default_root_object = "profile.html"
+default_root_object = "index.html"
 /* viewer_protocol_policy = "redirect-to-https" */
 
 #DynamoDB
@@ -19,6 +19,7 @@ secondary_key_type = "S" */
 run_time = "python3.9"
 handler  = ["getlambda.lambda_handler", "insertlambda.lambda_handler"]
 filename = ["getlambda.py", "insertlambda.py"]
+/* dr       = "false" */
 
 #API GATEWAY
 type = "EDGE"
