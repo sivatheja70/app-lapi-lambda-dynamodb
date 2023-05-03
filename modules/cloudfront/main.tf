@@ -1,5 +1,5 @@
 data "aws_s3_bucket" "s3_cloudfront" {
-  bucket = "sivatheja-test-cf"
+  bucket = var.existing_bucket
 }
 
 resource "aws_s3_bucket_policy" "s3_cloudfront_policy" {
@@ -25,12 +25,6 @@ resource "aws_s3_bucket_policy" "s3_cloudfront_policy" {
     ]
   })
 }
-
-
-/* provisioner "local-exec" {
-  command = "aws s3 cp ./profile.html/ s3://${aws_s3_bucket.sivatheja-zapcg.bucket}/ --recursive"
-} */
-
 
 ##############################################################################################
 resource "aws_cloudfront_origin_access_control" "s3_origin" {
@@ -108,8 +102,6 @@ min_ttl                = 0
   restrictions {
     geo_restriction {
       restriction_type = "none"
-      /* restriction_type = "whitelist"
-      locations        = ["US", "CA", "GB", "IN"] */
     }
   }
   tags = {

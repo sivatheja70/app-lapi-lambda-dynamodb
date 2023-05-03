@@ -21,6 +21,7 @@ module "cloudfront" {
   origin_id           = var.origin_id
   environment         = var.environment
   default_root_object = var.default_root_object
+  existing_bucket     = var.existing_bucket
 }
 
 #Dynamo DB
@@ -32,9 +33,6 @@ module "dynamodb" {
   write_capacity = var.write_capacity
   hash_key       = var.hash_key
   hash_key_type  = var.hash_key_type
-  /* secondary_key = var.secondary_key
-  secondary_key_type = var.secondary_key_type
-  dynamodb_environment = var.environment */
 }
 
 #Lambda
@@ -45,21 +43,18 @@ module "lambda" {
   run_time      = var.run_time
   file_path     = [for zip_file in data.archive_file.handler_zip : zip_file.output_path]
   environment   = var.environment
-  dr             = "false"
-  /* dynamodb_created_table = module.dynamodb.dynamodb_created_table */
+  dr             = var.dr
 }
+
 #Api Gateway
 module "api_gateway" {
   source           = "./modules/api_gateway"
   integration_type = var.integration_type
-  /* path = var.path */
   type                = var.type
   api_gateway_methods = var.api_gateway_methods
   stage_name          = var.environment
-  /* function_name = module.lambda.created_lambda_function_name */
   get_function_name  = module.lambda.get_function_name
   post_function_name = module.lambda.post_function_name
-  /* function_arn = module.lambda.created_lambda_function_arn */
   get_function_arn        = module.lambda.get_function_arn
   post_function_arn       = module.lambda.post_function_arn
   api_gateway_environment = var.environment
