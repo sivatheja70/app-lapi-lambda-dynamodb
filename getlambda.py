@@ -1,9 +1,11 @@
+import os
 import json
 import boto3
 
 def lambda_handler(event, context):
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-    
+    region = os.environ['REGION']
+    dynamodb = boto3.resource('dynamodb', region_name=region)
+
     table = dynamodb.Table('employeeprofile')
     
     # Check if there are any query parameters in the event
