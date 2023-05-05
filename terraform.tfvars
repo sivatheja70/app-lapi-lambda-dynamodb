@@ -20,6 +20,6 @@ filename = ["getlambda.py", "insertlambda.py"]
 dr       = "false"
 
 #API GATEWAY
-type = "EDGE"
+type                = "EDGE"
 api_gateway_methods = ["GET", "POST"]
 integration_type    = "AWS"
