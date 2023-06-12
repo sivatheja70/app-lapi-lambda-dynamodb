@@ -1,4 +1,4 @@
-environment = "snbx"
+environment = "sandbox"
 
 #cloudfront
 origin_id           = "s3_origin"

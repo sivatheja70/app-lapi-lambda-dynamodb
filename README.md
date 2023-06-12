@@ -46,3 +46,5 @@ To validate the disaster recovery configuration, you can modify the .tfvars file
 This should update the region to DR region in lambda functions. And the web page will render the data from the DR region's Dynamo DB.
 
 By following these steps and configurations, the system will be set up to allow accessing dynamic content, saving employee profiles, retrieving employee profiles, and validating the disaster recovery configuration in the Terraform deployment.
+
+aws s3 cp "C:\Users\SivathejaP\Desktop\internal task\multiregion_dynamodb-with-app\code\data.js" s3://sivatheja-test-cf/
